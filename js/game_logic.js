@@ -21,7 +21,7 @@ function GameLogic(curTiming, scanTimeStamp) {
         beatsPerMin: 600,
         answerBeats: [0, 10, 7, 6, 9, 7, 6, 8, 8, 9, 8, 6, 7, 5, 3, 4, 9, 8, 6, 8, 11, 5, 7, 5, 8, 6, 6, 6, 6, 7, 8, 7, 7, 5, 5, 6, 6, 8, 5, 5, 3, 5],
         answerWindow:    [9, 6, 5, 8, 6, 5, 7, 7, 8, 7, 5, 6, 4, 2, 3, 8, 7, 5, 6, 8,  4, 6, 4, 7, 5, 5, 5, 5, 6, 7, 6, 6, 4, 4, 5, 5, 7, 4, 4, 2, 5, 5],
-        hitTolerance: 225,
+        hitTolerance: 500,
         correctMsgs: [ '真棒!', '干得好!', '完美!', '耶!', '给力!', '漂亮!'],
         incorrectMsgs: ['Miss'],
         scoreMsgs: [
@@ -241,7 +241,7 @@ GameLogic.prototype = {
           // remove class after hitTolerance*2 period
           setTimeout(function () {
               scope.emit("deactivate",button);
-          }, scope.gameData.answerWindow[num] *60*1000/scope.gameData.beatsPerMin) //scope.gameData.hitTolerance * 2)
+          }, scope.gameData.answerWindow[num] *60*1000/scope.gameData.beatsPerMin + scope.gameData.hitTolerance * 2)
         });
     },
 
