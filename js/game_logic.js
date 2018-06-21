@@ -418,7 +418,7 @@ GameLogic.prototype = {
         "&user_id=" + stats['user_id'] + 
         "&lat=" + stats['lat'] + "&lng=" + stats['lng'];
         
-        // console.log("logging:" + url);
+        console.log("logging:" + url);
         
         $.get(url,function(data,status){
             console.log("sent log Status=" + status);
