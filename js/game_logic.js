@@ -35,7 +35,6 @@ function GameLogic(curTiming, scanTimeStamp) {
         timingActualEnd: 38000,	// ms
         timingScan: curTiming * 1000, //ms
         tsScan: scanTimeStamp,
-        tsLastActive: 0,
         sceanID: 0
     };
 }
@@ -55,7 +54,7 @@ GameLogic.prototype = {
     regEvts: {},
     
     gameStats: {},
-
+    tsLastActive: 0,
     tsMarker: 0,
 
     init: function () {
@@ -378,7 +377,7 @@ GameLogic.prototype = {
 
     evaluateScore:function () {
         var cur = this.getCurTimeStamp();
-        var delta = cur - this.gameData.tsLastActive;
+        var delta = cur - this.tsLastActive;
         var score = 0;
 
         if (delta > 900) {
