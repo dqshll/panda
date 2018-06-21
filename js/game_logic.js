@@ -380,23 +380,23 @@ GameLogic.prototype = {
         var cur = this.getCurTimeStamp();
         var delta = cur - this.gameData.tsLastActive;
         var score = 0;
-        if (delta > 0.9) {
+        if (delta > 900) {
             score = 1;
-        } else if (delta > 0.8) {
+        } else if (delta > 800) {
             score = 2;
-        } else if (delta > 0.7) {
+        } else if (delta > 700) {
             score = 3;
-        } else if (delta > 0.6) {
+        } else if (delta > 600) {
             score = 4;
-        } else if (delta > 0.5) {
+        } else if (delta > 500) {
             score = 5;
-        } else if (delta > 0.4) {
+        } else if (delta > 400) {
             score = 6;
-        } else if (delta > 0.3) {
+        } else if (delta > 300) {
             score = 7;
-        } else if (delta > 0.2) {
+        } else if (delta > 200) {
             score = 8;
-        } else if (delta > 0.1) {
+        } else if (delta > 100) {
             score = 9;
         }else {
             score = 10;
@@ -418,7 +418,7 @@ GameLogic.prototype = {
         "&user_id=" + stats['user_id'] + 
         "&lat=" + stats['lat'] + "&lng=" + stats['lng'];
         
-        console.log("logging:" + url);
+        // console.log("logging:" + url);
         
         $.get(url,function(data,status){
             console.log("sent log Status=" + status);
