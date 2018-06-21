@@ -380,6 +380,7 @@ GameLogic.prototype = {
         var cur = this.getCurTimeStamp();
         var delta = cur - this.gameData.tsLastActive;
         var score = 0;
+
         if (delta > 900) {
             score = 1;
         } else if (delta > 800) {
@@ -401,6 +402,8 @@ GameLogic.prototype = {
         }else {
             score = 10;
         }
+
+        console.log("evaluateScore delta = " + delta + " add " + score);
         return score;
     },
 
