@@ -320,11 +320,12 @@ GameLogic.prototype = {
     },
 
     getLoadingDuration: function () {
-    		var dur = this.gameData.timingActualStart - this.gameData.timingScan;
-    		if (dur < 0) {
-    			dur = 0;
-    		}
-    		return dur;
+        var dur = this.gameData.timingActualStart - this.gameData.timingScan;
+        if (dur < 0) {
+            dur = 0;
+        }
+        console.log ("getLoadingDuration scanTiming = " + this.gameData.timingScan + " dur = " + dur);
+        return dur;
     },
     
     // handle join after game start
@@ -333,8 +334,7 @@ GameLogic.prototype = {
         if (dur < 0) {
             dur = 0;
         }
-        
-        console.log ("getAlreadyPastDuration scanTiming = " + this.gameData.timingScan + " dur = " + dur);
+        // console.log ("getAlreadyPastDuration scanTiming = " + this.gameData.timingScan + " dur = " + dur);
         return dur;
     },
     
