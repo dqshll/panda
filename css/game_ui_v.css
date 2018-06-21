@@ -53,6 +53,7 @@ footer {
 
 footer .message {
   background: #1B1B1B;
+  width: 20vh;
   padding: 0px 2px 0px 2px;
   font-size: 2em;
   line-height: 2em;
@@ -71,7 +72,6 @@ footer .message {
 }
 
 #score_bar{
-    width: 20vh;
     float: right;
     background: #1B1B1B;
     margin: 10px 8px 10px 8px;
