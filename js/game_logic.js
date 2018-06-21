@@ -86,7 +86,7 @@ GameLogic.prototype = {
         
         var old_value = this.gameData.timingScan;
         // 加上一段补偿时间: server校对的时间流逝, 加上本地http请求的一半
-        this.gameData.timingScan += serverDur * 1.25 + httpDur * 0.5;
+        this.gameData.timingScan += serverDur + httpDur * 0.5;
 
         console.log("httpDur = " + httpDur + " serverDur = " + serverDur);
         console.log(" timingScan repay "+ old_value + " -> " + this.gameData.timingScan);
