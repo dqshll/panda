@@ -1,0 +1,267 @@
+html {
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    height:100%;
+    padding:0;
+    margin:0;
+    background-color: #1B1B1B;
+    color: #fff;
+    font-size: 1em;
+    line-height: 2em;
+    /* font-family: 'Abel', sans-serif; */
+    background-image: url(../img/game_bg_v.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.screen {
+    height:100%;
+    overflow-y:hidden;
+    display:flex;
+    display:-webkit-flex;
+    -webkit-flex-direction:row-reverse;
+    flex-direction: row-reverse;
+}
+
+header {
+  text-align: left;
+  margin: 0;
+  line-height: 1em;
+  background-color: #B6234A;
+}
+section {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+footer {
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    margin: 0;
+    align-items:center;
+    width: 20vw;
+    height: 100vh;
+}
+
+footer .message {
+  background: #1B1B1B;
+  width: 20vh;
+  padding: 0px 2px 0px 2px;
+  font-size: 2em;
+  line-height: 2em;
+  text-align: center;
+  margin-top:45vh;
+  transform:rotate(90deg);
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.flex-row {
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+#score_bar{
+    float: right;
+    background: #1B1B1B;
+    margin: 10px 8px 10px 8px;
+    padding: 10px 8px 10px 8px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    transform:rotate(90deg);
+}
+
+div.version {
+  float: right;
+  border: none;
+  background: none;
+  color: #666;
+}
+
+#timer.active {
+  background: #B6234A;
+}
+
+#timer,
+#close {
+  float: right;
+}
+
+.loading {
+    height:100%;
+    overflow-y:hidden;
+    display:flex;
+    display:-webkit-flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#wait_count_down {
+	-webkit-flex:1;
+	display: flex;
+	height: 10vh;
+    width: 20vw;
+	justify-content:center;
+	/* position: absolute; */
+	align-items:center;
+    flex-direction: row;
+    transform:rotate(90deg);
+    /* background-color: #4AC2DB; */
+}
+
+.wait_count_down_digit {
+	width: 2em;
+	height: auto;
+	justify-content: space-between;
+}
+
+.buttons {
+    padding: 0;
+    margin: 0;
+    justify-content: space-between;
+    height: 98vh;
+    width: 60vw;
+    flex-direction: column;
+}
+
+.buttons div {
+    -webkit-flex:1;
+    flex: 1;
+    margin: 0;
+    /*font-size: 3.5em;
+    line-height: 2em;
+    margin-right: 0.4em;
+    border-radius: 5em;
+    color: #ffffff;
+    text-decoration: none;*/
+    width: auto;
+    height: 9vh;
+    /*background: #828283;*/
+    /*box-shadow:inset 0px 0px 0px 0.1em #ffffff;*/
+    /*display: none;*/
+    background-image: url(../img/ind_blank_v.png);
+	background-position: center center;
+	background-size: 16vw auto;
+	/*background-attachment: fixed;*/
+    background-repeat: no-repeat;
+    /* transform:rotate(90deg); */
+	/*background-color: #000;*/
+    
+}
+
+.buttons div.active {
+    /*text-decoration: overline;*/
+    /*background: black !important;*/
+    background-image: url(../img/ind_hit_v.png);
+}
+
+.buttons div.bordered{
+    box-shadow:inset 0px 0px 0px 0.1em #ffffff;
+}
+
+a.bar-button:hover{
+    background: #5CADA9;
+}
+
+/* a.bar-button i {
+    margin-top: 0.35em;
+    margin-left: auto;
+}
+
+a.bar-button span {
+    -webkit-flex:1;
+    flex:1;
+    margin-left:1em;
+} */
+
+
+/*img#btnA {
+  background: rgb(250,190,11);
+}
+
+img#btnB {
+  background: rgb(245,51,19);
+}
+
+img#btnC {
+  background: rgb(33,111,241);
+}*/
+
+.thanks .buttons a {
+    padding: 0.25em;
+    font-size: 2.5em;
+    margin-right: 0.3em;
+    border-radius: 0.15em;
+}
+
+.thanks .message {
+    
+  background: #1b1b1b;
+  border-radius: 0.5em;
+  border: 1px solid #eee;
+  font-size: 2em;
+  /* line-width: 100vh; */
+  padding: 0.6em;
+  transform:rotate(90deg);
+}
+
+.thanks .buttons a i {
+    font-size: 1.5em;
+}
+
+.thanks .buttons a span {
+    font-size: 0.5em;
+    display: block;
+    line-height: 1em;
+}
+
+.screen p{
+    margin: 1em 1.75em 1.5em 0.75em;
+    text-align: left;
+    line-height: normal;
+    font-size: 1.1em;
+}
+
+.screen p a {
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: #4AC2DB;
+}
+
+.loading {
+  background-image: url(../img/wait_v.jpg);
+  background-position: center center;
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-color: #000;
+}
+
+.loading footer {
+  background: none;
+}
+
+.loader {
+  border: 1px solid #eee;
+  height: 0.5em;
+  margin: 39% 25%;
+  border-radius: 0.6em;
+}
+
+.progress-bar {
+  width: 0%;
+  background: #eee;
+  border-radius: 0.6em;
+  height: 100%;
+}

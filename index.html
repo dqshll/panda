@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <script type="text/javascript">
+    /*
+     A sample of a standard intrasonics eventing system for content engine
+     */
+    //"use strict";
+    //const intrasonics = (function(){
+    intrasonics = (function(){
+        var regEvts = {};
+        var initialStateCallbacks = [];
+        var initialState = null;
+        
+        // platform detection
+        //    const userAgent = window.navigator.userAgent.toLowerCase();
+        //    const ios = /iphone|ipod|ipad/.test( userAgent );
+        var userAgent = window.navigator.userAgent.toLowerCase();
+        var ios = /iphone|ipod|ipad/.test( userAgent );
+        var android = /android/.test( userAgent );
+        
+        var getInitialState = function(callback){
+            if(initialState){
+                callback(initialState);
+            }else {
+                initialStateCallbacks.push(callback);
+            }
+        }
+        
+        var setInitialState = function(state){
+            if(initialState){
+                throw "Initial state already set";
+            }
+            initialState = state;
+            initialStateCallbacks.forEach(function(callback){
+                callback(initialState);
+            });
+        }
+        
+        var on = function(evtName,callback){
+            if(!regEvts.hasOwnProperty(evtName)){
+                regEvts[evtName] = [];
+            }
+            regEvts[evtName].push(callback)
+        };
+        var sendMessage = function(msg){
+            const json = JSON.stringify(msg);
+            if( ios ) {
+                window.webkit.messageHandlers.sendMessage.postMessage(json);
+            } else if( android ) {
+                AndroidWebView.sendMessage(json);
+            }
+        };
+        var closeView = function(){
+            if ( ios ) {
+                window.webkit.messageHandlers.closeView.postMessage("Closing webview!");
+            } else if ( android ) {
+                AndroidWebView.closeView();
+            }
+        };
+        var emit = function(evtName,evtValue){
+            
+            if(regEvts.hasOwnProperty(evtName)){
+                try{
+                    var obj = evtValue;
+                    regEvts[evtName].forEach(function(callback){
+                        callback(obj);
+                    });
+                }catch(e){
+                    console.log("Callback failed",e);
+                }
+            } 
+            
+            // debug
+            //sendMessage(evtName + ' - ' + JSON.stringify(evtValue) );
+        };
+        
+        //Public API
+        return{
+            on:on,
+            emit:emit,
+            getInitialState:getInitialState,
+            sendMessage:sendMessage,
+            closeView:closeView,
+            setInitialState:setInitialState
+        }
+        
+    }());
+    </script>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>功夫熊猫</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="imagetoolbar" content="no" />
+        <link rel="stylesheet" media="all and (orientation:landscape)" href="css/game_ui.css" type="text/css"/>
+        <link rel="stylesheet" media="all and (orientation:portrait)" href="css/game_ui_v.css" type="text/css">
+        <!-- <link href="css/Abel.font.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+    </head>
+    <body>
+        <!-- <div class="screen thanks" style="display: none;">
+            <header>
+              <a id="btn-back"><i class="fa fa-arrow-left"></i> Back to App</a>
+            </header>
+            <section></section>
+            <footer>
+              <div class="message"></div>
+            </footer>
+        </div> -->
+
+        <div class="screen loading">
+            <section id="wait_count_down">
+                <img id="wait_count_down_d1" class="wait_count_down_digit" src="" alt=""></img>
+                <img id="wait_count_down_d0" class="wait_count_down_digit" src="" alt=""></img>
+            </section>
+        </div>
+
+        <div class="screen game" style="display: none;">
+            <header>
+              <!--<a id="btn-back"><i class="fa fa-arrow-left"></i> Back to App</a>-->
+              <!-- <div id="timer"><i class="fa fa-clock-o"></i> <span>00:00</span></div> -->
+              <div id="score_bar"><span>0分</span></div>
+            </header>
+            <section id="game_section">
+            	<div class="buttons flex-row">
+                    <div id="btnA" href="#" class="button"></div>
+                    <div id="btnB" href="#" class="button"></div>
+                    <div id="btnC" href="#" class="button"></div>
+                    <div id="btnD" href="#" class="button"></div>
+               </div>
+            </section>
+            <footer>
+                <div class="message"></div>
+            </footer>
+        </div>
+
+        <script type="text/javascript" src="js/jquery.min.js" charset="utf-8"></script>
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+        <script src="http://h5.edisonx.cn/718_audio/share.php?type=js"></script>
+        <script type="text/javascript" src="js/performance.now.js" charset="utf-8"></script>
+        <script type="text/javascript" src="js/jquery-ui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="js/fastclick.js" charset="utf-8"></script>
+        <script type="text/javascript" src="js/event_bus.js" charset="utf-8"></script>
+        <script type="text/javascript" src="js/game_logic.js" charset="utf-8"></script>
+        <script type="text/javascript"  src="js/game_ui.js" charset="utf-8"></script>
+        <script src='http://h5.edisonx.cn/718_audio/flip/js/vconsole.min.js'></script>
+        <script>
+
+            //var gameData = {{&settings}};
+			var tmp = getQueryString('t');
+			var curTiming = parseInt(tmp);
+			if(curTiming == NaN) {
+				curTiming = 0;
+            }
+            
+            tmp = getQueryString('ts');
+            var scanTimeStamp = parseInt(tmp);
+			
+            var game = new GameLogic(curTiming, scanTimeStamp);
+
+            function handleReceivedAction(action)
+            {
+                if ( action.id == 'start' ){
+                    game.startGame();
+                }
+            }
+
+            wx.config({
+                debug: false,
+                appId: wx_config['appId'],
+                timestamp: wx_config['timestamp'],
+                nonceStr: wx_config['nonceStr'],
+                signature: wx_config['signature'],
+                jsApiList: [
+                //    'openLocation',
+                'getLocation',
+                ]
+            });
+        
+            wx.ready(function () {
+                console.log('wx ready');
+
+                intrasonics.getInitialState(function(state){
+                    var action = state;
+                    handleReceivedAction(action);
+                });
+
+                // waits for trigger codes to be detected by ContentEngine SDK
+                intrasonics.on('action', function(action){
+                    handleReceivedAction(action);
+                });
+
+                FastClick.attach(document.body);
+
+                gameUI.init(game);
+                game.init();
+
+                setTimeout(function () {
+                    intrasonics.emit('action', {id:'start'});
+                }, game.getLoadingDuration());
+                
+                wx.getLocation({
+                    type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                    success: function (res) {
+                        // scope.gameStats['lat'] = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                        // scope.gameStats['lng'] = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                        console.log("lat=" + res.latitude + ";lng=" + res.longitude);
+                        // var speed = res.speed; // 速度，以米/每秒计
+                        // var accuracy = res.accuracy; // 位置精度
+                        // scope.logStats(scope.gameStats);
+                    }
+                });
+            });
+
+            // $(document).ready(function() {
+            window.onload = function(){
+                console.log('window onload')
+               
+            };
+            
+            function getQueryString(name) {
+		        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		        var r = window.location.search.substr(1).match(reg);
+		        if (r != null) return unescape(r[2]); return null;
+		    }
+
+        </script>
+
+    </body>
+</html>
