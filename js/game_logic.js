@@ -232,7 +232,7 @@ GameLogic.prototype = {
     },
 
     activateButtons: function (num) {
-        console.log('Question ' + (num + 1) + ' = ' + this.gameData.answers[num]);
+        // console.log('Question ' + (num + 1) + ' = ' + this.gameData.answers[num]);
         var scope = this;
         // add class to relevant buttons
         this.gameData.answers[num].forEach( function(button) {
