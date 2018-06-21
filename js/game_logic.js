@@ -246,13 +246,14 @@ GameLogic.prototype = {
     },
 
     showCorrectAnswer: function () {
-        this.playerScore += this.evaluateScore();
+        var addingScore = this.evaluateScore();
+        this.playerScore += addingScore;
         console.log ("adding score = " + this.playerScore);
         this.emit("updateScore", this.playerScore);
         // update message
-        var idx = Math.floor(Math.random() * this.gameData.correctMsgs.length);
-        var message = this.gameData.correctMsgs[idx];
-        this.emit("flashMessage", { message: message });
+        // var idx = Math.floor(Math.random() * this.gameData.correctMsgs.length);
+        // var message = this.gameData.correctMsgs[idx];
+        this.emit("flashMessage", { message: "+" + addingScore });
     },
 
     showIncorrectAnswer: function () {
