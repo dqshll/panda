@@ -149,17 +149,17 @@ div.version {
     color: #ffffff;
     text-decoration: none;*/
     width: auto;
-    height: 9vh;
+    height: 25vh;
     /*background: #828283;*/
     /*box-shadow:inset 0px 0px 0px 0.1em #ffffff;*/
     /*display: none;*/
     background-image: url(../img/ind_blank_v.png);
 	background-position: center center;
-	background-size: 16vw auto;
+	background-size: 16vh auto;
 	/*background-attachment: fixed;*/
     background-repeat: no-repeat;
     /* transform:rotate(90deg); */
-	/*background-color: #000;*/
+	/* background-color: #4AC2DB; */
     
 }
 
