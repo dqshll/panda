@@ -6,6 +6,9 @@ var gameUI = {
         this.on = bus.on;
         this.emit = bus.emit;
 
+        var audio_confirm = document.createElement("audio");
+        audio_confirm.src = "audio/sfx_confirm.mp3";
+
         $('div.buttons div').each(function (i) {
             console.log("Registering handlers");
             $(this).click(function () {
@@ -19,6 +22,8 @@ var gameUI = {
                       times: 2
                     }, 300);
                 }
+                vibrate(100);
+                audio_confirm.play();
             });
         });
 
@@ -136,7 +141,17 @@ var gameUI = {
             url += encodeURIComponent(url_params);
 
             window.location.href = url;
-		});
+        });
+        
+        function vibrate (duration) { 
+            if (navigator.vibrate) {
+                navigator.vibrate(duration);
+            } else if (navigator.webkitVibrate) {
+                navigator.webkitVibrate(duration);
+            }
+        }
+
+        
     }
     
 }
