@@ -112,6 +112,10 @@ div.version {
     flex-direction: row;
 }
 
+#wait_count_down_d1 {
+    display: none;
+}
+
 .wait_count_down_digit {
 	width: 2em;
 	height: auto;
@@ -151,7 +155,8 @@ div.version {
 .buttons div.active {
     /*text-decoration: overline;*/
     /*background: black !important;*/
-    background-image: url(../img/ind_hit.png);
+    /* background-image: url(../img/ind_hit.png); */
+    background-image: url(../img/ind_blank.png);
 }
 
 .buttons div.bordered{
