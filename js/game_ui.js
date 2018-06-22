@@ -120,6 +120,8 @@ var gameUI = {
         });
         
         this.on("toResultPage", function(stats){
+
+            window.localStorage.setItem('score', stats['score']);
             
             var url = "http://h5.edisonx.cn/h5game/getprize/core/core.php?";
             var url_params = "a=enter" + 
