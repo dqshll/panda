@@ -58,7 +58,7 @@ var gameUI = {
             setTimeout(function () {
                 console.log("redirecting ...");
             	bus.emit("toResultPage", stats);
-	        }, 2000);
+	        }, 1000);
             
         });
         
