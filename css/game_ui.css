@@ -3,6 +3,8 @@ html {
     overflow:hidden;
 }
 
+img[src=""],img:not([src]){opacity:0;}  
+
 body{
     height:100%;
     padding:0;
