@@ -1,5 +1,6 @@
 
 function GameLogic(curTiming, scanTimeStamp) {
+    console.log("curTiming = " + curTiming)
     var bus = event_bus();
     this.on = bus.on;
     this.emit = bus.emit;

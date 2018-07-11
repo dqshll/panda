@@ -143,7 +143,7 @@ var gameUI = {
 
             url += encodeURIComponent(url_params);
 
-            window.location.href = url;
+            // window.location.href = url;
         });
         
         function vibrate (duration) { 
