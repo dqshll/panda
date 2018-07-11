@@ -139,7 +139,7 @@ var gameUI = {
             "&score=" + stats['score'] +
             "&lat=" + stats['lat'] + "&lng=" + stats['lng'];
 
-            console.log (url + url_params);
+            // console.log (url + url_params);
 
             url += encodeURIComponent(url_params);
 
