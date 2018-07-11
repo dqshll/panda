@@ -125,6 +125,7 @@ var gameUI = {
             
             var url = "http://h5.edisonx.cn/h5game/getprize/core/core.php?";
             var url_params = "a=enter" + 
+            "&join_at=" + stats['joinAt'] + 
             "&st=" + stats['logTimeStampStart'] + 
             "&ed="+ stats['logTimeStampEnd'] + 
             "&sceneID=" + stats['sceanID'] + 
@@ -138,7 +139,7 @@ var gameUI = {
             "&score=" + stats['score'] +
             "&lat=" + stats['lat'] + "&lng=" + stats['lng'];
 
-            // console.log (url + url_params);
+            console.log (url + url_params);
 
             url += encodeURIComponent(url_params);
 

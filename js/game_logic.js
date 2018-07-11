@@ -34,6 +34,7 @@ function GameLogic(curTiming, scanTimeStamp) {
         timingActualStart: 7000, // ms
         timingActualEnd: 38000,	// ms
         timingScan: curTiming * 1000, //ms
+        joinAt: curTiming * 1000, //ms for log
         tsScan: scanTimeStamp,
         sceanID: 0
     };
@@ -301,6 +302,7 @@ GameLogic.prototype = {
     },
     getUserInfo: function (tsStart) {
     		var stats = {
+                joinAt:this.gameData.joinAt,
                 logTimeStampStart:tsStart,
                 logTimeStampEnd:0,
                 sceanID: this.gameData.sceanID,
@@ -409,6 +411,7 @@ GameLogic.prototype = {
 
     logStats:function (stats) {
         var url = "http://h5.edisonx.cn/h5game/getprize/core/core.php?a=log" + 
+        "&join_at=" + stats['joinAt'] + 
         "&st=" + stats['logTimeStampStart'] + 
         "&ed="+ stats['logTimeStampEnd'] + 
         "&sceneID=" + stats['sceanID'] + 
@@ -421,7 +424,7 @@ GameLogic.prototype = {
         "&user_id=" + stats['user_id'] + 
         "&lat=" + stats['lat'] + "&lng=" + stats['lng'];
         
-        // console.log("logging:" + url);
+        console.log("logging:" + url);
         
         $.get(url,function(data,status){
             console.log("sent log Status=" + status);
