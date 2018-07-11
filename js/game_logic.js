@@ -1,6 +1,5 @@
 
 function GameLogic(curTiming, scanTimeStamp) {
-    console.log("curTiming = " + curTiming)
     var bus = event_bus();
     this.on = bus.on;
     this.emit = bus.emit;
@@ -365,7 +364,7 @@ GameLogic.prototype = {
 			    success: function (res) {
 			        scope.gameStats['lat'] = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                     scope.gameStats['lng'] = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                    console.log("lat=" + res.latitude + ";lng=" + res.longitude);
+                    // console.log("lat=" + res.latitude + ";lng=" + res.longitude);
 			        // var speed = res.speed; // 速度，以米/每秒计
                     // var accuracy = res.accuracy; // 位置精度
                     scope.logStats(scope.gameStats);
