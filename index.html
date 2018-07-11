@@ -154,7 +154,7 @@
 
             //var gameData = {{&settings}};
 			var tmp = getQueryString('t');
-			var curTiming = parseInt(tmp);
+			var curTiming = parseFloat(tmp);
 			if(curTiming == NaN) {
 				curTiming = 0;
             }
